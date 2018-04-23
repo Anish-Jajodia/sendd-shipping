@@ -323,7 +323,7 @@ $('.page_list li a').click(function(){
 		       	var request = new XMLHttpRequest();
 				
                /* live api */
-			 request.open('POST', 'https://app.sendd.co/core/api/v1/order/');
+			 request.open('POST', 'https://api.sendd.co/core/api/v1/order/');
 			request.setRequestHeader('Content-Type', 'application/json');
 			request.setRequestHeader('Authorization', access_key);
 			/* live api */
