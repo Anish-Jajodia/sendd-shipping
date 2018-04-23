@@ -34,7 +34,7 @@ $('#login').click(function(e){
 			var request = new XMLHttpRequest();
 
 			//request.open('POST', 'https://api-staging.sendd.co/rest-auth/login/');
-			request.open('POST', 'https://app.sendd.co/rest-auth/login/');	
+			request.open('POST', 'https://api.sendd.co/rest-auth/login/');	
 			request.setRequestHeader('Content-Type', 'application/json');
 			request.setRequestHeader('Access-Control-Allow-Origin', '*'); 	
 			request.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
