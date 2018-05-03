@@ -36,9 +36,6 @@ $('#login').click(function(e){
 			//request.open('POST', 'https://api-staging.sendd.co/rest-auth/login/');
 			request.open('POST', 'https://api.sendd.co/rest-auth/login/');	
 			request.setRequestHeader('Content-Type', 'application/json');
-			request.setRequestHeader('Access-Control-Allow-Origin', '*'); 	
-			request.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS'); 
-			request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');			
 			request.onreadystatechange = function () {
 			  if (this.readyState === 4) {
 				console.log('Status:', this.status);
