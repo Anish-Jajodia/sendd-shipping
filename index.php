@@ -7,9 +7,9 @@ require __DIR__.'/vendor/autoload.php';
 use phpish\shopify;
 // Required File END...........
 error_reporting(E_ALL);
- //print_r($_SESSION); 
+ //print_r($_SESSION);
 ini_set('display_errors', 1);
-header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Credentials: true");
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');
@@ -25,13 +25,13 @@ $access_token = shopify\access_token($_REQUEST['shop'], SHOPIFY_APP_API_KEY, SHO
 ?>
 <html>
 <head>
- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700" rel="stylesheet"> 
- 
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/988a7dc35f.js"></script>
 <link rel="stylesheet" href="css/style.css" type="text/css">
-<link href="css/slick.css"  rel="stylesheet" type="text/css"/>  
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  rel="stylesheet" type="text/css"/>  
+<link href="css/slick.css"  rel="stylesheet" type="text/css"/>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"  rel="stylesheet" type="text/css"/>
 <script src="js/slick.js" type="text/javascript"></script>
  <script src="js/jquery.twbsPagination.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/on-off-switch.js"></script>
@@ -43,7 +43,7 @@ $access_token = shopify\access_token($_REQUEST['shop'], SHOPIFY_APP_API_KEY, SHO
 </div>
 <div class="content">
 <div class="pickupaddress" style="display:none">
-<?php include 'Pickup_address.php';?>	
+<?php include 'Pickup_address.php';?>
 </div>
 <input type="hidden" class="access_token_val" value="">
 <?php include 'login-form.php';?>
@@ -59,7 +59,7 @@ $('.page_list li a').click(function(){
     var show_div=$(this).attr('data-show');
 	$(this).addClass('selected');
 	 $(this).parent().addClass('selected').siblings().removeClass('selected');
-	 
+
 	 if(show_div =='orderform'){
 	  var shop_url = "<?php echo $_SESSION['shop'];?>";
 				$.post('/checklogin.php', {shop_url:shop_url,getaccesstoken:1}, function(resp){
@@ -72,11 +72,11 @@ $('.page_list li a').click(function(){
 						var access_key ='Token '+$('body .access_token_val').val();
 						//alert(access_key);
 						 $('.content').children().hide();
-						$('.orderform').show();		
+						$('.orderform').show();
 					}else{
 					 $('.content').children().hide();
-						$('.error_msg').show();	
-					$('.orderform').hide();						
+						$('.error_msg').show();
+					$('.orderform').hide();
 					}
 				});
 	 }
@@ -94,10 +94,10 @@ $('.page_list li a').click(function(){
 		$.ajax({
 			url: '/orders.php?access_token='+access_token+'&shop='+shop+'&limit='+limit+'&page_id='+page,
 			success: function(data){
-				$('.content-container').html(data);	
+				$('.content-container').html(data);
 			}
-								
-			
+
+
 		});
 	}
 	// get order count
@@ -111,7 +111,7 @@ $('.page_list li a').click(function(){
 				var noofPages = $.trim(data);
 				$('.page_inner').remove();
 				if(noofPages>0){
-					
+
 					$('.page').append('<div class="page_inner"></div>');
 					var obj = $('.page_inner').twbsPagination({
 							totalPages: noofPages,
@@ -120,15 +120,15 @@ $('.page_list li a').click(function(){
 								getorders(page,250);
 								}
 							//console.log(page);
-						   
+
 						});
 				}
 				else{
-					$('.content-container').html( "<div class='no-result'>No Order</div>");	
+					$('.content-container').html( "<div class='no-result'>No Order</div>");
 				}
 			}
-								
-			
+
+
 		});
 	}
 	function cutAtfirstpart(text, n) {
@@ -148,18 +148,22 @@ $('.page_list li a').click(function(){
 		return text;
 	}
 	function closepopup(){
-		if(jQuery('#popup_content').is(':visible')){	
+		if(jQuery('#popup_content').is(':visible')){
 			jQuery('#popup_content').fadeOut(800);
 			jQuery(".background_overlay").fadeOut(800);
 			order_count();
 		}
 	}
+ function skip_last() {
+      var slideno = $('.slick-slide').length;
+      $('.popupcontent_inner').slick('slickGoTo', slideno);
+  }
 // Initial Page Load
 (function($) {
 	var access_token='<?php echo $access_token ?>';
 	var shop='<?php echo $_REQUEST['shop'] ?>';
 	order_count();
-	
+
 	$('body').on('click', 'a.fancybox_btn', function(e) {
 		e.preventDefault();
 		$('.popupcontent_inner').remove();
@@ -169,17 +173,17 @@ $('.page_list li a').click(function(){
 		 if(len > 0){
 			 $.ajax({
 			type: 'POST',
-			async:false,	 
+			async:false,
 			url: '/get_pickupaddress.php?pickupaddres=1&shop='+shop,
 			success: function(resp){
-	        	
+
 				pickup_address=resp;
 				console.log(resp);
 			}
 		});
 				//alert(pickup_address);
 			$('.select_box:checkbox:checked').each(function(index){
-				    var order_id = $(this).val(); 
+				    var order_id = $(this).val();
 					var order_name1 = $(this).parent().next('td').html();
 					var products_name = $(this).attr('data-products_name');
 					var customer_email = $(this).attr('data-customer_email');
@@ -215,24 +219,24 @@ $('.page_list li a').click(function(){
 							dots: true,
 							infinite: false,
 						});
-		 
+
 					};
 					sliderInit(); // call slider function
 					jQuery('#popup_content').show();
 					$('.popupcontent_inner').get(0).slick.setPosition();
 					jQuery(".background_overlay").fadeIn(800);
-	
-    
+
+
 		}
-	
+
 		else {
 		  alert("First Select the orders");
 		}
-	
-	}); 
-	
 
-	
+	});
+
+
+
 	$('body').on('click', 'a.Create_order', function(e) {
 	 var access_key ='Token '+$('body .access_token_val').val();
 	$('.response_msg').remove();
@@ -241,7 +245,7 @@ $('.page_list li a').click(function(){
 	var i=0;
 	$('.popupcontent_inner .item').each(function(index){
 		if(index < leng-1){
-			
+
 		  /* pickup address detail*/
 		  var address2 = $('.pickup_address option:selected',this).attr('data-pickupadd2');
 		   var pickup_address1 = $('.pickup_address option:selected',this).attr('data-pickupadd1');
@@ -253,27 +257,27 @@ $('.page_list li a').click(function(){
 		  //var pickup_address = $('.pickup_address option:selected',this).attr('data-pickupusername');
 		  //var pickup_address = $('.pickup_address option:selected',this).text();
 		   //var pickup_address1 = $('.pickup_address option:selected',this).val();
-		  
+
 		   var content_type = $('.content_type:checked',this).val();
 		   var providers = $('.providers option:selected',this).val();
 		   //alert(providers);
 		   var customer_total_price = $('.customer_total_price',this).val();
-		   
+
 		   //var p_contact_person = pickup_address.split(':')[0];
-		   
+
 		   //var p_contact_person = $('.p_contact_person',this).val();
 		   //var p_phone = pickup_address.split('::')[1];
-		    
+
 		   var p_emailid = $('.p_emailid',this).val();
-		   //var p_zipcode = pickup_address.split('_')[1].split('::')[0];	
-		   
+		   //var p_zipcode = pickup_address.split('_')[1].split('::')[0];
+
 		   //var p_zipcode = $('.p_zipcode',this).val();
 			//alert("p_zipcode" +p_zipcode);
 		 /* pickup address detail*/
 		  /*customer  detail*/
 		   var customer_name = $('.customer_name',this).val();
 		   var customer_phone = $('.customer_phone',this).val();
-		   customer_phone=customer_phone.replace(/\s/g, ""); 
+		   customer_phone=customer_phone.replace(/\s/g, "");
 		   var customer_email = $('.customer_email',this).val();
 		   var customer_address = $('.customer_address',this).val();
 		   var total_weight = $('.total_weight',this).val();
@@ -291,7 +295,7 @@ $('.page_list li a').click(function(){
 				}
 		   var financial_status = $('.total_weight',this).attr('data-financial_status');
 		   customer_address1 = customer_address.split(',city');
-				
+
 			var c_address = customer_address1[0];
 	          c_address_count =c_address.length;
 			  if(c_address_count > 60){
@@ -303,8 +307,8 @@ $('.page_list li a').click(function(){
 			  }
 			var c_city = customer_address.split('city:')[1].split(',')[0];
 			var c_state = customer_address.split('province:')[1].split(',')[0];
-			var c_country = customer_address.split('country:')[1].split(',')[0].split('-zip')[0];	
-			var c_zipcode = customer_address.split('zip:')[1];	
+			var c_country = customer_address.split('country:')[1].split(',')[0].split('-zip')[0];
+			var c_zipcode = customer_address.split('zip:')[1];
 			console.log("c_city"+c_city+"c_state"+c_state+"c_address"+c_address);
 			console.log("c_country="+c_country);
 			var payment_method = $('.payment_method').text();
@@ -319,26 +323,26 @@ $('.page_list li a').click(function(){
 			console.log("c_address1="+ c_address1);
 			console.log("c_address2="+ c_address2);
 			/* customer detail*/
-	            
+
 		       	var request = new XMLHttpRequest();
-				
+
                /* live api */
 			 request.open('POST', 'https://api.sendd.co/core/api/v1/order/');
 			request.setRequestHeader('Content-Type', 'application/json');
 			request.setRequestHeader('Authorization', access_key);
 			/* live api */
-			
+
 			/* test api */
 			/*request.open('POST', 'https://api-staging.sendd.co/core/api/v1/order/');
 			request.setRequestHeader('Content-Type', 'application/json');
 			request.setRequestHeader('Authorization', access_key);*/
 			/* test api */
-			
+
 			request.onreadystatechange = function () {
 			  if (this.readyState === 4) {
 				console.log('Status:', this.status);
 				console.log('Headers:', this.getAllResponseHeaders());
-				 
+
 				console.log('Body:', this.responseText);
 				 var json = JSON.parse(this.responseText);
 				console.log(json);
@@ -350,7 +354,7 @@ $('.page_list li a').click(function(){
 							url: '/order_note.php?access_token='+access_token+'&shop='+shop+'&trackingcode='+tracking_no+'&trackingcompany='+company+'&order_id='+order_id,
 								success: function(data){
 									console.log(data);
-									
+
 								}
 						});
 					 /* add the tracking code in order note */
@@ -370,19 +374,19 @@ $('.page_list li a').click(function(){
 							error_msg=error_msg+'<br>';
 						});
 						$('.item_inner.last').append("<div class='response_msg'>Order id ="+order_name1+" Message ="+error_msg+"</div>");
-						
-					
+
+
 				}
-				
+
 				if(i == leng-1){
 					$('.load_outer').remove();
-				} 
+				}
 			}
 			};
-              
-				 
-				
-					  
+
+
+
+
 			var body = {
 			  'customer_reference_id':order_name1,
 			  'shipments': [
@@ -396,8 +400,8 @@ $('.page_list li a').click(function(){
 					'fragile': false,
 					collectable_value,
 					'description': products_name
-					
-					
+
+
 				  }
 				}
 			  ],
@@ -411,7 +415,7 @@ $('.page_list li a').click(function(){
 				'city':p_city,
 				'pincode': p_zipcode,
 				 'country': 'IN',
-				
+
 			  },
 			  'delivery_detail': {
 				'address_type': 'H',
@@ -425,7 +429,7 @@ $('.page_list li a').click(function(){
 				'state': c_state,
 				'country': c_country
 				//'shipping_company_preference':providers
-				
+
 			  },
 			  'shipping_type': 'S',
 			  'cod': payment_method,
@@ -433,15 +437,15 @@ $('.page_list li a').click(function(){
 			  'process': true,
 			  'notifications':true,
 			 };
-          
-			request.send(JSON.stringify(body)); 
+
+			request.send(JSON.stringify(body));
 			i++;
 		}
-		
+
 	});
 });
 	$('body').on('click', '.put_track', function() {
-		
+
 		var order_id= $(this).attr('data-id');
 		var tracking_code= $(this).attr('data-tracking_code');
 		if(tracking_code){
@@ -453,9 +457,9 @@ $('.page_list li a').click(function(){
 						console.log(data);
 						//alert('Tracking Code Added Successfully!');
 						$(this).after('<p style="color:red">Tracking Code Added Successfully!</p>');
-						order_count(); // call order function 
+						order_count(); // call order function
 					}
-				}); 
+				});
 		}
 		else
 		{
@@ -468,7 +472,7 @@ $('.page_list li a').click(function(){
 			chk.checked = !chk.checked;
 		}
 	});
-    
+
 
 })(jQuery);
 </script>
