@@ -258,7 +258,8 @@ $('.page_list li a').click(function(){
 		  //var pickup_address = $('.pickup_address option:selected',this).text();
 		   //var pickup_address1 = $('.pickup_address option:selected',this).val();
 
-		   var content_type = $('.content_type:checked',this).val();
+		   // var content_type = $('.content_type:checked',this).val();
+        var content_type = 'P';
 		   var providers = $('.providers option:selected',this).val();
 		   //alert(providers);
 		   var customer_total_price = $('.customer_total_price',this).val();
@@ -312,7 +313,8 @@ $('.page_list li a').click(function(){
 			console.log("c_city"+c_city+"c_state"+c_state+"c_address"+c_address);
 			console.log("c_country="+c_country);
 			var payment_method = $('.payment_method').text();
-			if(payment_method == '"Cash on Delivery (COD)"' || payment_method =='"manual"' || payment_method == '"cash_on_delivery"' || financial_status == 'pending')
+			// if(payment_method == '"Cash on Delivery (COD)"' || payment_method =='"manual"' || payment_method == '"cash_on_delivery"' || financial_status == 'pending')
+      if(payment_method == '"Cash on Delivery (COD)"' || payment_method == '"cash_on_delivery"' || financial_status == 'pending')
 			{
 			var collectable_value= customer_total_price;
 			payment_method = true;
