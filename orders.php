@@ -7,8 +7,8 @@ $order_count=$_REQUEST['order_count'];
 $shopify = shopify\client($_REQUEST['shop'], SHOPIFY_APP_API_KEY, $access_token );
 try
 {
-	      
-			$orders = $shopify('GET /admin/orders.json', array('limit'=>$_REQUEST['limit'],'page'=>$_REQUEST['page_id'],'fulfillment_status'=>'unshipped','order'=>'created_at asc'));
+
+			$orders = $shopify('GET /admin/orders.json', array('limit'=>$_REQUEST['limit'],'page'=>$_REQUEST['page_id'],'fulfillment_status'=>'unshipped','order'=>'created_at desc'));
 			if($orders){
 			require __DIR__.'/popupcontent.php'; //popup content
 			echo '<table class="table-hover expanded sennd-order-table">';
@@ -35,7 +35,7 @@ try
 								</tr>
 							  </thead>';
 							  echo '<tbody>';
-							  
+
 			foreach($orders as $singleorder)
 			{
 				$quantity_total=0;
@@ -46,7 +46,7 @@ try
 				$total_weight =$singleorder['total_weight'];
 				 $gateway =$singleorder['gateway'];
 				 $financial_status=$singleorder['financial_status'];
-				 $total_price=$singleorder['total_price']; 
+				 $total_price=$singleorder['total_price'];
 				 $email=$singleorder['email'];
 				 $address=$singleorder['shipping_address']['address1'];
 				 $address2=$singleorder['shipping_address']['address2'];
@@ -64,7 +64,7 @@ try
 				{
 					$fulfillment_status = 'Unfulfilled';
 				}
-				else 
+				else
 				{
 					$fulfillment_status = $singleorder['fulfillment_status'];
 				}
@@ -74,7 +74,7 @@ try
 				}
 				$line_items=$singleorder['line_items'];
 				foreach($line_items as $line_items){
-						$quantity_total=$quantity_total+ $line_items['quantity']; 
+						$quantity_total=$quantity_total+ $line_items['quantity'];
 						//Get product names
 						if($product_titles ==''){
 							$product_titles = $line_items['title'];
@@ -82,9 +82,9 @@ try
 						else{
 							$product_titles = $product_titles.','.$line_items['title'];
 						}
-						
+
 					}
-				
+
 				echo "<tr>";
 				echo '<td><input  type="checkbox" $disabled1 class="select_box" name="order_ids_'.$id.'"  value="'.$id.'"  data-financial_status="'.$financial_status.'" data-total_weight="'.$total_weight.'" data-quantity_total="'.$quantity_total.'" data-customer_total-price="'.$total_price.'" data-customer_email="'.$email.'" data-customer_name="'.$customer_name.'" data-fulladdress="'.$full_address.'" data-gateway="'.$gateway.'" data-customer_phone="'.$customer_phone.'"  data-products_name="'.$product_titles.'"></td>';
 				echo "<td>".$name."</td>";
@@ -95,7 +95,7 @@ try
 				echo "<td>".$total_price."</td>";
 				echo "<td>".$note_value."<a href='javascript:void(0);' data-id='$id' data-tracking_code='$note_value' class='put_track'>Apply Tracking Code</a>"."</td>";
 				echo "</tr>";
-					
+
 			}
 			 echo '</tbody>';
 			  echo '</table>';
