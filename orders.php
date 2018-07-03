@@ -77,10 +77,18 @@ try
 						$quantity_total=$quantity_total+ $line_items['quantity'];
 						//Get product names
 						if($product_titles ==''){
-							$product_titles = $line_items['title'];
+							if($line_items['variant_title'] == '') {
+									 $product_titles = $line_items['title'];
+							 } else {
+									 $product_titles = $line_items['title'].'/'.$line_items['variant_title'];
+							 }
 						}
 						else{
-							$product_titles = $product_titles.','.$line_items['title'];
+							if($line_items['variant_title'] == '') {
+									 $product_titles = $product_titles.','.$line_items['title'];
+							 } else {
+						 $product_titles = $product_titles.','.$line_items['title'].'/'.$line_items['variant_title'];
+							 }
 						}
 
 					}
