@@ -11,9 +11,15 @@ try
 			$orders = $shopify('GET /admin/orders.json', array('limit'=>$_REQUEST['limit'],'page'=>$_REQUEST['page_id'],'fulfillment_status'=>'unshipped','order'=>'created_at desc'));
 			if($orders){
 			require __DIR__.'/popupcontent.php'; //popup content
+			echo '<table>';
+			echo '<tr>';
+			echo "<th><a href='#popup_content' class='fancybox_btn'>Submit</a></th>";
+      echo "<th><a href='#popup_content' class='fancybox_btn2'>Bulk Apply Tracking</a></th>";
+      echo '</tr>';
+      echo '</table>';
 			echo '<table class="table-hover expanded sennd-order-table">';
 			 echo "<thead><tr>";
-			 echo '<th>&nbsp;</th><th><span>Order</span></th>
+			 echo '<th>&nbsp;<input type="checkbox" class="chk_boxes" label="check all"  />&nbsp;</th><th><span>Order</span></th>
 								  <th class="is-sortable">
 									<span>Date</span>
 								  </th>
@@ -94,7 +100,7 @@ try
 					}
 
 				echo "<tr>";
-				echo '<td><input  type="checkbox" $disabled1 class="select_box" name="order_ids_'.$id.'"  value="'.$id.'"  data-financial_status="'.$financial_status.'" data-total_weight="'.$total_weight.'" data-quantity_total="'.$quantity_total.'" data-customer_total-price="'.$total_price.'" data-customer_email="'.$email.'" data-customer_name="'.$customer_name.'" data-fulladdress="'.$full_address.'" data-gateway="'.$gateway.'" data-customer_phone="'.$customer_phone.'"  data-products_name="'.$product_titles.'"></td>';
+				echo '<td><input  type="checkbox" $disabled1 class="select_box" name="order_ids_'.$id.'"  value="'.$id.'"  data-financial_status="'.$financial_status.'" data-total_weight="'.$total_weight.'" data-quantity_total="'.$quantity_total.'" data-customer_total-price="'.$total_price.'" data-customer_email="'.$email.'" data-customer_name="'.$customer_name.'" data-fulladdress="'.$full_address.'" data-gateway="'.$gateway.'" data-customer_phone="'.$customer_phone.'"  data-products_name="'.$product_titles.'" data-id="'.$id.'" data-tracking_code="'.$note_value.'"></td>';
 				echo "<td>".$name."</td>";
 				echo "<td>".$created_at."</td>";
 				echo "<td>".$customer_name."</td>";
@@ -122,6 +128,20 @@ catch (shopify\ApiException $e)
 
 
 echo "<a href='#popup_content' class='fancybox_btn'>Submit</a>";
+echo "<a href='#popup_content' class='fancybox_btn2'>Bulk Apply Tracking</a>";
 
 
 ?>
+<script>
+    $(document).ready(function() {
+    $('.chk_boxes').click(function(){
+                    // $('.select_box').attr('checked','checked')
+                    var checked_status = this.checked;
+   $(".select_box").each(function()
+     {
+      this.checked = checked_status;
+     });
+
+    })
+});
+</script>

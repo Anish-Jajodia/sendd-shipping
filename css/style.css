@@ -10,19 +10,19 @@ Gist
  Watch 0
   Star 0
   Fork 0 Anish-Jajodia/sendd-shipping
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Settings Insights 
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Settings Insights
 Branch: master Find file Copy pathsendd-shipping/css/style.css
 93f642f  23 hours ago
 @Anish-Jajodia Anish-Jajodia Update style.css
 1 contributor
-RawBlameHistory     
+RawBlameHistory
 309 lines (302 sloc)  5.67 KB
 /*google fonts*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700');
 /*google fonts*/
 /*font-family: 'Open Sans', sans-serif;*/
 body{color:#000;}
-*{ 
+*{
 margin:0px;
 padding:0px;
 font-family: 'Open Sans', sans-serif;
@@ -48,6 +48,21 @@ img.loadimg {
 	width:100%;
 }
 .content-container a.fancybox_btn {
+    background: #94be46;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    padding: 10px 30px;
+    display: inline-block;
+    border-bottom: 2px solid #5f8d3e;
+    border-radius: 2px;
+    float: left;
+    margin-left: 9px;
+    margin-top: 17px;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.content-container a.fancybox_btn2 {
     background: #94be46;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
@@ -179,7 +194,7 @@ div#popup_content {
     content: "\f138";
     font: normal normal normal 40px/1 FontAwesome;
     color: #fff;
-} 
+}
 .slick-next {
     right: 45px !important;
 }
@@ -273,7 +288,7 @@ input[type=checkbox] {
  -moz-transform: scale(1.5); /* FF */
  -webkit-transform: scale(1.5); /* Safari and Chrome */
  -o-transform: scale(1.5); /* Opera */
-  
+
 }
 .content-container a.fancybox_btn, .login-form-main button {
   background: #94be46 none repeat scroll 0 0;
