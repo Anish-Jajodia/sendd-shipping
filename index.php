@@ -446,6 +446,38 @@ $('.page_list li a').click(function(){
 
 	});
 });
+  $('body').on('click', 'a.fancybox_btn2', function(e) {
+
+  e.preventDefault();
+  $('.popupcontent_inner').remove();
+  $('#popup_content').append('<div class="popupcontent_inner"></div>');
+  var content,pickup_address='';
+  var len = $('.select_box:checkbox:checked').length;
+   if(len > 0){
+    $('.select_box:checkbox:checked').each(function(index){
+            var order_id = $(this).attr('data-id');
+        var tracking_code = $(this).attr('data-tracking_code');
+              if(tracking_code){
+                tracking_no = tracking_code.split(',')[0];
+                tracking_company = tracking_code.split(',')[1];
+                $.ajax({
+                    url: '/trackingcode.php?access_token='+access_token+'&shop='+shop+'&trackingcode='+tracking_no+'&trackingcompany='+tracking_company+'&order_id='+order_id,
+                    success: function(data){
+                      console.log(data);
+                      $(this).after('<p style="color:green">Tracking Code Added Successfully!</p>');
+                    }
+                  });
+              } else {
+                          $(this).after('<p style="color:red">No tracking no is available</p>');
+
+                    }
+  })
+      order_count(); // call order function
+   } else {
+    alert("First Select the orders");
+   }
+
+  });
 	$('body').on('click', '.put_track', function() {
 
 		var order_id= $(this).attr('data-id');
