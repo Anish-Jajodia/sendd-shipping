@@ -11,7 +11,7 @@ try
 			$orders = $shopify('GET /admin/orders.json', array('limit'=>$_REQUEST['limit'],'page'=>$_REQUEST['page_id'],'fulfillment_status'=>'unshipped','order'=>'created_at desc'));
 			if($orders){
 			require __DIR__.'/popupcontent.php'; //popup content
-			echo '<table>';
+			echo '<table style=margin-bottom>';
 			echo '<tr>';
 			echo "<th><a href='#popup_content' class='fancybox_btn'>Submit</a></th>";
       echo "<th><a href='#popup_content' class='fancybox_btn2'>Bulk Apply Tracking</a></th>";
