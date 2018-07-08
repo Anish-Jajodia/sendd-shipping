@@ -19,6 +19,25 @@ require __DIR__.'/connection.php'; //DB connectivity
 		<div class="msg">&nbsp;</div>
 	<input type="submit" name="login" id="login" value="Login"/>
 	</form>
+	<!-- shipping company_preference -->
+
+<div class="ship_preference">
+	<h3>Prefered Courier</h3>
+	<form name="company_preference" action="#" method="post" id="set_company_preference">
+		<select id="courier_company">
+				<option  value='FE'>Fedex</option>
+				<option  value='DH'>Delhivery</option>
+				<option  value='EE'>EcomExpress</option>
+				<option  value='DT'>DotZot</option>
+				<option  value='AX'>Aramex</option>
+				<!-- <option  value='BD'>Bluedart</option> -->
+		</select>&emsp;&emsp;
+		<input type="submit" value="Set Preference"><br><br>
+		<div class="msg-ship">&nbsp;</div>
+
+	</form>
+</div>
+<!-- shipping company_preference -->
 	<!-- Upload logo for shipping label -->
 	 <div class="logo_option">
 	 <h3>Upload Logo for Shipping Label</h3>
@@ -43,23 +62,7 @@ require __DIR__.'/connection.php'; //DB connectivity
 <!-- Pickup address -->
 
 
-<!-- shipping company_preference -->
 
-	<div class="ship_preference">
-		<h3>Prefered Courier</h3>
-		<form name="company_preference" action="#" method="post" id="set_company_preference">
-			<select id="courier_company">
-			    <option  value='FE'>Fedex</option>
-			    <option  value='DH'>Delhivery</option>
-			    <option  value='EE'>EcomExpress</option>
-			    <option  value='DT'>DotZot</option>
-			    <option  value='AX'>Aramex</option>
-			    <option  value='BD'>Bluedart</option>
-			</select>&emsp;&emsp;
-			<input type="submit" value="Set Preference"><br><br>
-	  </form>
-	</div>
-	<!-- shipping company_preference -->
 </div>
 <script>
 $('#courier_company').val("<?php echo $ship_company; ?>");
@@ -150,9 +153,9 @@ $('#set_company_preference').on('submit',function(e) {
     	$.post('/shipping_preference.php', {shop_url:shop_url,company_prefered:courier}, function(resp){
 					if(resp!=''){
 					alert(resp);
-						$('.msg').html(resp);
+						$('.msg-ship').html(resp);
 					}else{
-						$('.msg').html('error while saving data');
+						$('.msg-ship').html('error while saving data');
 					}
 				});
 })
