@@ -30,7 +30,7 @@ require __DIR__.'/connection.php'; //DB connectivity
 				<option  value='EE'>EcomExpress</option>
 				<option  value='DT'>DotZot</option>
 				<option  value='AX'>Aramex</option>
-				<!-- <option  value='BD'>Bluedart</option> -->
+				<option  value='BD'>Bluedart</option>
 		</select>&emsp;&emsp;
 		<input type="submit" value="Set Preference"><br><br>
 		<div class="msg-ship">&nbsp;</div>
