@@ -42,12 +42,10 @@ $access_token = shopify\access_token($_REQUEST['shop'], SHOPIFY_APP_API_KEY, SHO
 <?php include 'dashboard.php';?>
 </div>
 <div class="content">
-<!-- <div class="pickupaddress" style="display:none">
+<div class="pickupaddress" style="display:none">
 <?php include 'Pickup_address.php';?>
-</div> -->
+</div>
 <input type="hidden" class="access_token_val" value="">
-<input type="hidden" class="ship_logo_path" value="">
-<input type="hidden" class="ship_preference_company" value="">
 <?php include 'login-form.php';?>
 <div class="error_msg" style="display:none"><p>Please login to Your Sendd Shipping account First</p></div>
 	<div class="orderform" style="display:none">
@@ -62,37 +60,26 @@ $('.page_list li a').click(function(){
 	$(this).addClass('selected');
 	 $(this).parent().addClass('selected').siblings().removeClass('selected');
 
-   if(show_div =='orderform'){
-    var shop_url = "<?php echo $_SESSION['shop'];?>";
-        $.post('/checklogin.php', {shop_url:shop_url,getaccesstoken:1}, function(resp){
-          console.log("resp="+resp);
-          //var resp1= resp.find('.session_email').html();
-          resp=$.trim(resp);
-          if(resp!=''){
-            //location.href = 'hiddenpage.php';
-            $('.access_token_val').val(resp);
-            var access_key ='Token '+$('body .access_token_val').val();
-            var ship_logo = $.trim($($.parseHTML(resp)).filter("#ship_logo").html());
-                        var ship_preference_company = $.trim($($.parseHTML(resp)).filter("#ship_preference_company").html());
-                        console.log('ship_preference_company',ship_preference_company)
-            if(ship_logo !=''){
-              ship_logo = 'https://'+'sendd-shipping.herokuapp.com'+'/images/'+ship_logo;
-
-            $('.ship_logo_path').val(ship_logo);
-            }
-            if(ship_preference_company != '') {
-            $('.ship_preference_company').val(ship_preference_company);
-            }
-            //alert(access_key);
-             $('.content').children().hide();
-            $('.orderform').show();
-          }else{
-           $('.content').children().hide();
-            $('.error_msg').show();
-          $('.orderform').hide();
-          }
-        });
-   }
+	 if(show_div =='orderform'){
+	  var shop_url = "<?php echo $_SESSION['shop'];?>";
+				$.post('/checklogin.php', {shop_url:shop_url,getaccesstoken:1}, function(resp){
+					console.log("resp="+resp);
+					//var resp1= resp.find('.session_email').html();
+					resp=$.trim(resp);
+					if(resp!=''){
+						//location.href = 'hiddenpage.php';
+						$('.access_token_val').val(resp);
+						var access_key ='Token '+$('body .access_token_val').val();
+						//alert(access_key);
+						 $('.content').children().hide();
+						$('.orderform').show();
+					}else{
+					 $('.content').children().hide();
+						$('.error_msg').show();
+					$('.orderform').hide();
+					}
+				});
+	 }
 	 else{
 	 $('.content').children().hide();
 	 $('.'+show_div).show();
@@ -252,8 +239,6 @@ $('.page_list li a').click(function(){
 
 	$('body').on('click', 'a.Create_order', function(e) {
 	 var access_key ='Token '+$('body .access_token_val').val();
-   var ship_logo_path =$('body .ship_logo_path').val();
-   var ship_preference_company = $('body .ship_preference_company').val();
 	$('.response_msg').remove();
 		$( '<div class="load_outer"> <img src="images/loading3.gif" class="loadimg"></div>' ).insertAfter('.Create_order');
 	var leng = $('.popupcontent_inner .item').length;
@@ -403,7 +388,7 @@ $('.page_list li a').click(function(){
 
 
 
-if(ship_logo_path) {
+
 			var body = {
 			  'customer_reference_id':order_name1,
 			  'shipments': [
@@ -453,65 +438,7 @@ if(ship_logo_path) {
 			  'insurance': false,
 			  'process': true,
 			  'notifications':true,
-        'shipping_label_specification':{
-       'logo':ship_logo_path
-       },
-       'shipping_company_preference':ship_preference_company,
 			 };
-    } else {
-      var body = {
-        'customer_reference_id':order_name1,
-        'shipments': [
-        {
-          'item_detail': {
-          'content': content_type,
-          'purpose': 'C',
-          'value': customer_total_price,
-          'qty':total_qty,
-          'weight':0.5,
-          'fragile': false,
-          collectable_value,
-          'description': products_name
-
-
-          }
-        }
-        ],
-        'pickup_detail': {
-         'address_type': 'O',
-        'company_name': p_company_name,
-        'contact_person': p_contact_person,
-        'phone': p_phone,
-        'address_1': pickup_address1,
-        'address_2': address2,
-        'city':p_city,
-        'pincode': p_zipcode,
-         'country': 'IN',
-
-        },
-        'delivery_detail': {
-        'address_type': 'H',
-        'contact_person': customer_name,
-        'phone': customer_phone,
-        'email': customer_email,
-        'address_1': c_address1,
-        'address_2': c_address2,
-        'pincode': c_zipcode,
-        'city': c_city,
-        'state': c_state,
-        'country': c_country
-        //'shipping_company_preference':providers
-
-        },
-        'shipping_type': 'S',
-        'cod': payment_method,
-        'insurance': false,
-        'process': true,
-        'notifications':true,
-       'shipping_company_preference':ship_preference_company,
-       };
-
-    }
 
 			request.send(JSON.stringify(body));
 			i++;
