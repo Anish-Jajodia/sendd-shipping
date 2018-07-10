@@ -25,6 +25,7 @@ require __DIR__.'/connection.php'; //DB connectivity
 	<h3>Prefered Courier</h3>
 	<form name="company_preference" action="#" method="post" id="set_company_preference">
 		<select id="courier_company">
+				<option  value=''>None</option>
 				<option  value='FE'>Fedex</option>
 				<option  value='DH'>Delhivery</option>
 				<option  value='EE'>EcomExpress</option>
