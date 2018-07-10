@@ -403,7 +403,7 @@ $('.page_list li a').click(function(){
 
 
 
-
+if(ship_logo_path) {
 			var body = {
 			  'customer_reference_id':order_name1,
 			  'shipments': [
@@ -458,6 +458,60 @@ $('.page_list li a').click(function(){
        },
        'shipping_company_preference':ship_preference_company,
 			 };
+    } else {
+      var body = {
+        'customer_reference_id':order_name1,
+        'shipments': [
+        {
+          'item_detail': {
+          'content': content_type,
+          'purpose': 'C',
+          'value': customer_total_price,
+          'qty':total_qty,
+          'weight':0.5,
+          'fragile': false,
+          collectable_value,
+          'description': products_name
+
+
+          }
+        }
+        ],
+        'pickup_detail': {
+         'address_type': 'O',
+        'company_name': p_company_name,
+        'contact_person': p_contact_person,
+        'phone': p_phone,
+        'address_1': pickup_address1,
+        'address_2': address2,
+        'city':p_city,
+        'pincode': p_zipcode,
+         'country': 'IN',
+
+        },
+        'delivery_detail': {
+        'address_type': 'H',
+        'contact_person': customer_name,
+        'phone': customer_phone,
+        'email': customer_email,
+        'address_1': c_address1,
+        'address_2': c_address2,
+        'pincode': c_zipcode,
+        'city': c_city,
+        'state': c_state,
+        'country': c_country
+        //'shipping_company_preference':providers
+
+        },
+        'shipping_type': 'S',
+        'cod': payment_method,
+        'insurance': false,
+        'process': true,
+        'notifications':true,
+       'shipping_company_preference':ship_preference_company,
+       };
+
+    }
 
 			request.send(JSON.stringify(body));
 			i++;
