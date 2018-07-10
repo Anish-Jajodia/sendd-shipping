@@ -80,7 +80,9 @@ $('.page_list li a').click(function(){
             }
             if(ship_preference_company != '') {
             $('.ship_preference_company').val(ship_preference_company);
-            }
+          } else {
+            $('.ship_preference_company').val('');
+          }
             //alert(access_key);
              $('.content').children().hide();
             $('.orderform').show();
