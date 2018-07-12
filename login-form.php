@@ -1,6 +1,7 @@
 <?php
 $shop_url =$_REQUEST['shop'];
 require __DIR__.'/connection.php'; //DB connectivity
+	$ship_company ='';$email='';$password = '';$profile_photo= '';
 	$login_detail = pg_query($dbconn4, "SELECT * FROM user_table  WHERE store_url = '{$shop_url}'");
 	if(pg_num_rows($login_detail)){
 		while ($row = pg_fetch_assoc($login_detail)) {
