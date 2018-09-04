@@ -6,7 +6,6 @@ require __DIR__.'/connection.php'; //DB connectivity
 require __DIR__.'/vendor/autoload.php';
 use phpish\shopify;
 // Required File END...........
-
 error_reporting(E_ALL);
  //print_r($_SESSION);
 ini_set('display_errors', 1);
