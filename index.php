@@ -209,7 +209,8 @@ $('.page_list li a').click(function(){
 					var total_weight = $(this).attr('data-total_weight');
 					var quantity_total = $(this).attr('data-quantity_total');
 					var financial_status = $(this).attr('data-financial_status');
-					content ='<div class="item"><div class="item_inner"><h3>Shipping information</h3><input type="hidden" value="'+total_weight+'" data-order_id="'+order_id+'" data-order_name="'+order_name1+'"  data-quantity_total="'+quantity_total+'" data-products_name= "'+products_name+'" data-financial_status="'+financial_status+'" class="total_weight"> <div class="fhalf">'+pickup_address+'</div>';
+          var item_sku = $(this).attr('data-item-sku');
+					content ='<div class="item"><div class="item_inner"><h3>Shipping information</h3><input type="hidden" value="'+total_weight+'"data-item-sku="'+item_sku+'" data-order_id="'+order_id+'" data-order_name="'+order_name1+'"  data-quantity_total="'+quantity_total+'" data-products_name= "'+products_name+'" data-financial_status="'+financial_status+'" class="total_weight"> <div class="fhalf">'+pickup_address+'</div>';
 					content = content + '<div class="shalf"><label>Customer Name:</label><input type="text" class="customer_name" value="'+customer_name+'"><br><label>Customer Email:</label><input type="text" class="customer_email" value="'+customer_email+'"><br><label>Customer phone:</label><input type="text" class="customer_phone" value="'+customer_phone+'"><br><label>Customer Address:</label><textarea class="customer_address" value="'+customer_address+'">'+customer_address+'</textarea><label>Total amount pay:</label><input type="text" class="customer_total_price" value="'+customer_total_price+'">';
 					content = content + '<br><label>Payment Type: <p class="payment_method">"'+payment_method+'"</p></label>';
 					// content = content + '<br><div class="c_type"><label>Content</label><span><input type="radio" checked value="P" name="content_type" class="content_type">Product</span> <span><input type="radio" value="D" name="content_type" class="content_type">Documents</span></div></div></div>';
@@ -305,6 +306,7 @@ $('.page_list li a').click(function(){
 		   var order_id = $('.total_weight',this).attr('data-order_id');
 		   var order_name1 = $('.total_weight',this).attr('data-order_name');
 		   var products_name = $('.total_weight',this).attr('data-products_name');
+       var products_sku = $('.total_weight',this).attr('data-item-sku');
 		   // set the description limit to 100
 		     if (products_name.length > 100){
 					products_name=products_name.substring(0,100);
@@ -417,7 +419,8 @@ if(ship_logo_path) {
 					'weight':0.5,
 					'fragile': false,
 					collectable_value,
-					'description': products_name
+					'description': products_name,
+          'sku':products_sku,
 
 
 				  }
@@ -473,7 +476,8 @@ if(ship_logo_path) {
            'weight':0.5,
            'fragile': false,
            collectable_value,
-           'description': products_name
+           'description': products_name,
+           'sku':products_sku,
 
 
            }
@@ -531,7 +535,8 @@ if(ship_logo_path) {
           'weight':0.5,
           'fragile': false,
           collectable_value,
-          'description': products_name
+          'description': products_name,
+          'sku':products_sku,
 
 
           }
@@ -584,7 +589,8 @@ if(ship_logo_path) {
            'weight':0.5,
            'fragile': false,
            collectable_value,
-           'description': products_name
+           'description': products_name,
+           'sku':products_sku,
 
 
            }
