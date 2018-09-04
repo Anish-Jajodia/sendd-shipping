@@ -45,7 +45,6 @@ try
 			foreach($orders as $singleorder)
 			{
 				$quantity_total=0;
-				$item_sku = '';
 				$product_titles='';
 				 $id =$singleorder['id'];
 				 $name =$singleorder['name'];
@@ -83,11 +82,6 @@ try
 				foreach($line_items as $line_items){
 						$quantity_total=$quantity_total+ $line_items['quantity'];
 						//Get product names
-						if($item_sku == '') {
-						    $item_sku = $line_items['sku'];
-						} else {
-						    $item_sku = $item_sku.','.$line_items['sku'];
-						}
 						if($product_titles ==''){
 							if($line_items['variant_title'] == '') {
 									 $product_titles = $line_items['title'];
@@ -106,7 +100,7 @@ try
 					}
 
 				echo "<tr>";
-				echo '<td><input  type="checkbox" $disabled1 class="select_box" name="order_ids_'.$id.'"  value="'.$id.'"  data-financial_status="'.$financial_status.'" data-total_weight="'.$total_weight.'" data-quantity_total="'.$quantity_total.'" data-customer_total-price="'.$total_price.'" data-customer_email="'.$email.'" data-customer_name="'.$customer_name.'" data-fulladdress="'.$full_address.'" data-gateway="'.$gateway.'" data-customer_phone="'.$customer_phone.'"  data-products_name="'.$product_titles.'" data-id="'.$id.'" data-tracking_code="'.$note_value.'" data-item-sku="'.$item_sku.'"></td>';
+				echo '<td><input  type="checkbox" $disabled1 class="select_box" name="order_ids_'.$id.'"  value="'.$id.'"  data-financial_status="'.$financial_status.'" data-total_weight="'.$total_weight.'" data-quantity_total="'.$quantity_total.'" data-customer_total-price="'.$total_price.'" data-customer_email="'.$email.'" data-customer_name="'.$customer_name.'" data-fulladdress="'.$full_address.'" data-gateway="'.$gateway.'" data-customer_phone="'.$customer_phone.'"  data-products_name="'.$product_titles.'" data-id="'.$id.'" data-tracking_code="'.$note_value.'"></td>';
 				echo "<td>".$name."</td>";
 				echo "<td>".$created_at."</td>";
 				echo "<td>".$customer_name."</td>";
